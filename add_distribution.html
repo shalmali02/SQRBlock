@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Distribution Details</title>
+    <style>
+        body{
+            font-family:Arial;
+            background:#f7f9fc;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            margin:0;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            width:420px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            color:#2c3e50;
+            margin-bottom:20px;
+        }
+
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+
+        input, button{
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:14px;
+        }
+
+        button{
+            background:#3498db;
+            color:white;
+            border:none;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        button:hover{
+            background:#2980b9;
+        }
+
+        .back{
+            display:block;
+            margin-top:15px;
+            text-align:center;
+            text-decoration:none;
+            color:#3498db;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Add Distribution Details</h2>
+
+    <form method="POST">
+        <input type="text" name="transport_method" placeholder="Transport Method (Truck / Van / Ship)" required>
+        <input type="date" name="dispatch_date" required>
+        <input type="date" name="arrival_date" required>
+        <input type="text" name="location" placeholder="Distribution Location" required>
+        <button type="submit">Submit Distribution Details</button>
+    </form>
+
+    <a href="/" class="back">← Back to Dashboard</a>
+</div>
+
+</body>
+</html>

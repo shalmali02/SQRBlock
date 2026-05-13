@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Product Verification</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f7f9fc;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.card{
+background:white;
+padding:30px;
+width:500px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2{
+text-align:center;
+color:#2c3e50;
+margin-bottom:20px;
+}
+
+.info{
+margin:10px 0;
+font-size:15px;
+}
+
+.label{
+font-weight:bold;
+color:#333;
+}
+
+.valid{
+margin-top:20px;
+padding:10px;
+background:#e8f8f0;
+color:#27ae60;
+font-weight:bold;
+border-radius:5px;
+text-align:center;
+}
+
+.invalid{
+margin-top:20px;
+padding:10px;
+background:#fdecea;
+color:#e74c3c;
+font-weight:bold;
+border-radius:5px;
+text-align:center;
+}
+
+/* SUPPLY CHAIN TABLE */
+
+.table-title{
+margin-top:25px;
+font-weight:bold;
+text-align:center;
+color:#2c3e50;
+}
+
+table{
+width:100%;
+margin-top:10px;
+border-collapse:collapse;
+font-size:14px;
+}
+
+th, td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#f2f2f2;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Product Verification</h2>
+
+<div class="info">
+<span class="label">Product Name:</span> {{product[1]}}
+</div>
+
+<div class="info">
+<span class="label">Batch ID:</span> {{product[2]}}
+</div>
+
+<div class="info">
+<span class="label">Product Details:</span> {{product[3]}}
+</div>
+
+<div class="info">
+<span class="label">Manufacture Date:</span> {{product[4]}}
+</div>
+
+<div class="info">
+<span class="label">Expiry Date:</span> {{product[5]}}
+</div>
+
+{% if status == "verified" %}
+<div class="valid">
+✔ Product Verified – Data matches blockchain
+</div>
+{% else %}
+<div class="invalid">
+⚠ Product Tampered – Data mismatch detected
+</div>
+{% endif %}
+
+<!-- SUPPLY CHAIN HISTORY -->
+
+<div class="table-title">Supply Chain History</div>
+
+<table>
+
+<tr>
+<th>Stage</th>
+<th>Actor</th>
+<th>Location</th>
+<th>Time</th>
+</tr>
+
+{% if history %}
+{% for h in history %}
+<tr>
+<td>{{h[0]}}</td>
+<td>{{h[1]}}</td>
+<td>{{h[2]}}</td>
+<td>{{h[3]}}</td>
+</tr>
+{% endfor %}
+{% else %}
+<tr>
+<td colspan="4">No supply chain data available</td>
+</tr>
+{% endif %}
+
+</table>
+
+</div>
+
+</body>
+</html>

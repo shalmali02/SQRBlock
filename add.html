@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Add Product</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      width: 420px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input, textarea, button {
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #219150;
+    }
+
+    .back {
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      text-decoration: none;
+      color: #3498db;
+      font-weight: bold;
+    }
+
+    .note{
+      font-size: 13px;
+      color:#555;
+      margin-bottom:15px;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Add Product</h2>
+
+  <div class="note">
+    Manufacturer will create the initial product record
+  </div>
+
+  <form action="/add" method="POST">
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="text" name="batch" placeholder="Batch ID" required>
+    <textarea name="details" placeholder="Product Details" required></textarea>
+
+    <input type="date" name="mfg" required>
+    <input type="date" name="exp" required>
+
+    <input type="text" name="location" placeholder="Manufacturing Location" required>
+
+    <button type="submit">Submit Product</button>
+  </form>
+
+  <a href="/" class="back">← Back to Home</a>
+</div>
+
+</body>
+</html>

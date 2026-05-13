@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Retail Details</title>
+    <style>
+        body{
+            font-family:Arial;
+            background:#f7f9fc;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            margin:0;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            width:420px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            color:#2c3e50;
+            margin-bottom:20px;
+        }
+
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+
+        input, button{
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:14px;
+        }
+
+        button{
+            background:#9b59b6;
+            color:white;
+            border:none;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        button:hover{
+            background:#8e44ad;
+        }
+
+        .back{
+            display:block;
+            margin-top:15px;
+            text-align:center;
+            text-decoration:none;
+            color:#3498db;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Add Retail Details</h2>
+
+    <form method="POST">
+        <input type="text" name="store_name" placeholder="Store Name" required>
+        <input type="text" name="location" placeholder="Store Location" required>
+        <input type="date" name="available_date" required>
+        <button type="submit">Submit Retail Details</button>
+    </form>
+
+    <a href="/" class="back">← Back to Dashboard</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<h2>Edit Product</h2>
+
+<form method="POST">
+
+<label>Product Name</label>
+<input type="text" name="name" value="{{product[1]}}" required>
+
+<label>Batch ID</label>
+<input type="text" name="batch" value="{{product[2]}}" required>
+
+<label>Product Details</label>
+<textarea name="details">{{product[3]}}</textarea>
+
+<label>Manufacture Date</label>
+<input type="date" name="mfg" value="{{product[4]}}">
+
+<label>Expiry Date</label>
+<input type="date" name="exp" value="{{product[5]}}">
+
+<button type="submit">Update Product</button>
+
+</form>
+
+<br>
+<a href="/">← Back to Home</a>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FoodSQRBlock Dashboard</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f7f9fc;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+    }
+
+    .user{
+      font-weight:bold;
+      color:#555;
+      font-size:16px;
+    }
+
+    .logout{
+      background:#e74c3c;
+      color:white;
+      padding:8px 14px;
+      border-radius:5px;
+      text-decoration:none;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:15px;
+      margin-bottom:30px;
+    }
+
+    .card{
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .card h3{
+      margin:0;
+      color:#555;
+      font-size:16px;
+    }
+
+    .card p{
+      font-size:28px;
+      margin:10px 0 0;
+      font-weight:bold;
+      color:#2c3e50;
+    }
+
+    .add-btn{
+      display:inline-block;
+      margin-bottom:15px;
+      padding:10px 15px;
+      background:#27ae60;
+      color:white;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .dist-btn{
+      background:#3498db;
+      color:white;
+      padding:6px 10px;
+      border-radius:5px;
+      text-decoration:none;
+    }
+
+    .retail-btn{
+      background:#9b59b6;
+      color:white;
+      padding:6px 10px;
+      border-radius:5px;
+      text-decoration:none;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background:white;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    th, td {
+      border: 1px solid #eee;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background:#2c3e50;
+      color:white;
+    }
+
+    img{
+      border-radius:6px;
+    }
+
+    a {
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="user">
+    Logged in as: {{username}} ({{role}})
+  </div>
+  <a href="/logout" class="logout">Logout</a>
+</div>
+
+<h2>FoodSQRBlock Dashboard</h2>
+
+<div class="cards">
+  <div class="card">
+    <h3>Total Products</h3>
+    <p>{{ total_products }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Total Supply Chain Stages</h3>
+    <p>{{ total_stages }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Your Role</h3>
+    <p style="font-size:22px;">{{ role.capitalize() }}</p>
+  </div>
+
+  <div class="card">
+    <h3>QR Verification</h3>
+    <p style="font-size:22px;">Active</p>
+  </div>
+</div>
+
+<!-- MANUFACTURER ONLY -->
+{% if role == 'manufacturer' %}
+<a href="/add" class="add-btn">➕ Add Product</a>
+{% endif %}
+
+{% if data|length == 0 %}
+<p>No products yet.</p>
+{% else %}
+
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Batch</th>
+<th>QR</th>
+
+{% if role == 'admin' %}
+<th>Edit</th>
+<th>Delete</th>
+{% endif %}
+
+{% if role == 'distributor' %}
+<th>Distribution</th>
+{% endif %}
+
+{% if role == 'retailer' %}
+<th>Retail</th>
+{% endif %}
+
+<th>Manufacture Date</th>
+<th>Expiry Date</th>
+<th>Location</th>
+</tr>
+
+{% for p in data %}
+<tr>
+<td>{{p['id']}}</td>
+<td>{{p['name']}}</td>
+<td>{{p['batch']}}</td>
+
+<td>
+<img src="/static/qrcodes/{{p['batch']}}.png" width="60">
+</td>
+
+<!-- ADMIN ONLY -->
+{% if role == 'admin' %}
+<td><a href="/edit/{{p['id']}}">✏</a></td>
+<td><a href="/delete/{{p['id']}}">🗑</a></td>
+{% endif %}
+
+<!-- DISTRIBUTOR -->
+{% if role == 'distributor' %}
+<td><a href="/add_distribution/{{p['batch']}}" class="dist-btn">Add</a></td>
+{% endif %}
+
+<!-- RETAILER -->
+{% if role == 'retailer' %}
+<td><a href="/add_retail/{{p['batch']}}" class="retail-btn">Add</a></td>
+{% endif %}
+
+<td>{{p['mfg']}}</td>
+<td>{{p['exp']}}</td>
+<td>{{p['location']}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+</body>
+</html>
